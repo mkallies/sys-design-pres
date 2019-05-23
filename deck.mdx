@@ -1,7 +1,7 @@
-export { future as theme } from "mdx-deck/themes"
-import { Split } from "mdx-deck/layouts"
-import Button from "./button"
-import { Head, Appear } from "mdx-deck"
+export { swiss as theme } from "mdx-deck/themes"
+import { Split, FullScreenCode } from "mdx-deck/layouts"
+import { Button } from "./components"
+import { Slide, Notes, Head, Appear } from "mdx-deck"
 
 <Head>
   <title>Styled-system #1</title>
@@ -13,33 +13,56 @@ import { Head, Appear } from "mdx-deck"
 
 # What is it
 
-Collection of utility functions that add style props to your React components and allows you to control styles based on global theme constants or design tokens - Styled-system
+"Collection of utility functions that add style props to your React components and allows you to control styles based on global theme constants or design tokens" - styled-system
 
----
-
-# Utility functions
+- Requires a CSS-in-JS library such as styled-components or emotion
+- Pushes you to use a global theme
+- Use utility functions to style your UI
+- Create responsive styling via array or object
 
 ---
 
 # Design tokens and using a global theme
 
+- Example theme here
+
+<Notes>
+  - Use your design tokens to setup the theme file - How the theme relates to
+  the utility functions
+</Notes>
+
 ---
 
-# Using the theme
+# Utility functions
+
+- space & color
+- variant, style, compose
+
+<Notes>
+  - Talk about space and color API - Talk about variant, style and compose with
+  examples
+</Notes>
 
 ---
 
 # Responsive styling
 
+- Defined by the breakpoints property in your theme file
+- Defaults to pixels but you can change the unit type
+
+```
+[600, 900, 1200, 1800]
+```
+
+<Notes>- Examples of how to use styling by array and object properties</Notes>
+
 ---
 
 # Why should I use styled-system?
 
-<ul>
-  <Appear>
-    <li>Consistency</li>
-    <li>Easy</li>
-    <li>Maintainability</li>
-    <li>Quality</li>
-  </Appear>
-</ul>
+<Appear>
+  <li>Consistency</li>
+  <li>Easy</li>
+  <li>Maintainability</li>
+  <li>Quality</li>
+</Appear>

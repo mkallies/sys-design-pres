@@ -7,4 +7,4 @@ const Button = styled.button`
   ${fontSize}
 `
 
-export default Button
+export { Button }
