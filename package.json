@@ -10,7 +10,7 @@
   "keywords": [
     "theme"
   ],
-  "author": "Diana Mounter",
+  "author": "Michael Kallies",
   "license": "MIT",
   "devDependencies": {
     "mdx-deck": "^1.5.15"
