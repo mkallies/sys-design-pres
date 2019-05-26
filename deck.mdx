@@ -1,13 +1,9 @@
-export { swiss as theme } from "mdx-deck/themes"
-import { Split, FullScreenCode } from "mdx-deck/layouts"
-import { Button } from "./components"
-import { Slide, Notes, Head, Appear } from "mdx-deck"
+import { Image } from "mdx-deck"
+import { FullScreenCode } from "mdx-deck/layouts"
+import QuoteLayout from "./QuoteLayout"
+export { default as theme } from "./theme"
 
-<Head>
-  <title>Styled-system #1</title>
-</Head>
-
-# What is Styled-System and Why Should I Use It
+# What is Styled-System And Why Should I Use It
 
 ---
 
@@ -22,51 +18,283 @@ import { Slide, Notes, Head, Appear } from "mdx-deck"
 
 ---
 
-# Design tokens and using a global theme
+## Three Tenets of styled-system
 
-- Example theme here
+**1.** Style consistently with a global theme
 
-<Notes>
-  - Use your design tokens to setup the theme file - How the theme relates to
+**2.** Respond to changing requirements quickly
+
+**3.** Create mobile-first responsive layouts with ease
+
+```notes
+  - Ask people about their experiences?
+  - Using SASS / CSS variables (not
+  available in all browsers) allows a theme
+  - Do people think theme first when
+  designing an application?
+```
+
+---
+
+# Using a global theme
+
+- What are my design tokens?
+- What does spacing look like? (margin + padding)
+- Typography
+- Breakpoints
+- Borders
+- Colors
+- etc...
+
+```notes
+  - Use your design tokens to setup the theme file
+  - How the theme relates to
   the utility functions
-</Notes>
+  - Typography: font family, font size, font weight, text transform
+```
+
+---
+
+export default QuoteLayout
+
+```jsx
+export const theme = {
+  breakpoints: [32, 48, 64],
+  space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
+  fontSizes: [12, 14, 16, 20, 24, 36, 48, 80, 96],
+  fontWeights: [100, 200, 300, 400, 500, 600, 700, 800, 900],
+  letterSpacings: {
+    normal: "normal",
+    heading: "0.1em"
+  },
+  fonts: {
+    serif: "athelas, georgia, times, serif"
+  },
+  borders: ["2px solid", "4px solid"],
+  colors: {
+    black: "#000",
+    "light-gray": "#eee",
+    "near-white": "#f4f4f4",
+    white: "#fff"
+  }
+  // ...and so on
+}
+```
+
+```notes
+Example of a theme
+```
 
 ---
 
 # Utility functions
 
-- space & color
+- space & color (and more!)
 - variant, style, compose
 
-<Notes>
-  - Talk about space and color API - Talk about variant, style and compose with
-  examples
-</Notes>
+```notes
+  - Talk about space and color API
+  - Relate back to theme
+  - Component API allows us to respond to changing requirements quickly
+  - Talk about variant, style and compose with
+  examples.
+  - Variant and style is how we can combine styles from our theme
+```
+
+---
+
+# space & color
+
+---
+
+```jsx
+import { space, color } from 'styled-system'
+
+
+const Box = styled.div`
+  ${space}
+  ${color}
+`
+
+<Box m={2} p={4} bg='red' color='rebeccapurple'>
+  {children}
+</Box>
+
+<Box py={2}  mx={1} bg='red' color='rebeccapurple'>
+  {children}
+</Box>
+
+```
+
+---
+
+# variant function
+
+---
+
+export default QuoteLayout
+
+```jsx
+// somewhere in theme.js
+buttonStyles: {
+  primary: {
+    color: colors.white,
+    background: colors.blue,
+    border: borders[0],
+  }
+}
+
+import { variant } from "styled-system"
+const btnStyles = variant({ key: "buttonStyles"})
+
+const Button = styled.button`
+  ${btnStyles}
+`
+
+<Button variant='primary'>
+  OK
+</Button>
+```
+
+---
+
+# style function
+
+---
+
+export default QuoteLayout
+
+```jsx
+// from documentation...
+
+const fontSize = style({
+  // React prop name and CSS property
+  prop: "fontSize",
+  // CSS property (if different from prop argument)
+  cssProperty: "fontSize",
+  // key for theme values
+  key: "fontSizes",
+  // accessor function for transforming the value
+  transformValue: n => n + "px",
+  // add a fallback scale object or array, if theme is not present
+  scale: [0, 4, 8, 16, 32],
+  // Optional prop alias
+  alias: "ffffontSizzzee"
+})
+
+const Text = styled.div`
+  ${fontSize}
+`
+
+const SomeComponent = props => <Text fontSize={3}>Hello</Text>
+const SomeComponent = props => <Text ffffontSizzzee={1}>Hello</Text>
+```
+
+---
+
+# compose function
+
+---
+
+export default QuoteLayout
+
+```jsx
+// style/utils.js
+import {
+  compose,
+  fontFamily,
+  fontSize,
+  fontWeight,
+  lineHeight,
+  color
+} from "styled-system"
+export const typography = compose(
+  fontFamily,
+  fontSize,
+  fontWeight,
+  lineHeight,
+  color
+)
+// text.js
+import { typography } from "style/utils"
+
+const Text = styled.div`
+  ${typograph}
+`
+```
 
 ---
 
 # Responsive styling
 
 - Defined by the breakpoints property in your theme file
-- Defaults to pixels but you can change the unit type
+- Defaults to px (if you supply you're own breakpoints) but you can change the unit type
 
+```notes
+  - How weird is it to use arrays? At first object seems sensible
+  but arrays are much nicer once you use them
+  - Using object properties are frowned upon (why?_ check docs)
+  - Greay for font-size, margin, padding, and width.
 ```
-[600, 900, 1200, 1800]
-```
-
-<Notes>- Examples of how to use styling by array and object properties</Notes>
 
 ---
 
-Comparison between styling
+export default QuoteLayout
+
+```jsx
+const breakpoints = [
+  600,
+  900,
+  1200,
+  1800,
+]
+
+// aliases
+breakpoints.sm = breakpoints[0]
+breakpoints.md = breakpoints[1]
+breakpoints.lg = breakpoints[2]
+breakpoints.xl = breakpoints[3]
+
+<Box
+  width={[
+    1,    // 100% width below the smallest breakpoint
+    1/2,  // 50% from the next breakpoint and up
+    1/4   // 25% from the next breakpoint and up
+  ]}
+/>
+
+<Box width={{ sm: 1, md: 1/2, lg: 1/4 }} />
+```
+
+```notes
+You can change the unit of the breakpoint
+```
 
 ---
 
 # Why should I use styled-system?
 
-<Appear>
-  <li>Consistency</li>
-  <li>Easy</li>
-  <li>Maintainability</li>
-  <li>Quality</li>
-</Appear>
+- Consistency
+- Easy
+- Maintainability
+- GitHub's Primer Components
+
+```notes
+During code review you don't know the style of each component.
+With s-s you know exactly what you are getting
+Show an example of styled system with variants, responsive design vs regular css in js
+```
+
+---
+
+# Thanks!
+
+---
+
+### References
+
+- [Styled-System](https://styled-system.com/)
+- [Component Based Design System With Styled-System](https://varun.ca/styled-system/)
+- [Brent Jackson's Blog](https://jxnblk.com/blog/)
+- [Custom CSS is the path to Inconsistent UI - Artem Sapegin](https://www.youtube.com/watch?v=_CsBRkRTzIA)
+- [Primer Components](https://primer.style/components)

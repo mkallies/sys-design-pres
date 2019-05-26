@@ -1,20 +1,21 @@
 {
-  "name": "sys-design-res",
+  "name": "y",
   "version": "1.0.0",
-  "description": "system design presentation",
+  "description": "A theme for mdx-slides",
+  "main": "index.js",
+  "scripts": {
+    "start": "mdx-deck deck.mdx -p 8989",
+    "build": "mdx-deck build deck.mdx"
+  },
+  "keywords": [
+    "theme"
+  ],
   "author": "Michael Kallies",
   "license": "MIT",
-  "private": true,
-  "scripts": {
-    "start": "mdx-deck deck.mdx",
-    "build": "mdx-deck build deck.mdx",
-    "pdf": "mdx-deck pdf deck.mdx",
-    "image": "mdx-deck screenshot deck.mdx",
-    "help": "mdx-deck"
-  },
   "devDependencies": {
-    "mdx-deck": "^2.3.2",
-    "styled-components": "^4.2.0",
-    "styled-system": "^4.2.2"
+    "mdx-deck": "^1.5.15"
+  },
+  "dependencies": {
+    "superbox": "^2.1.0"
   }
 }
