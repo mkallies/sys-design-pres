@@ -176,7 +176,6 @@ export default QuoteLayout
 
 ```jsx
 // from documentation...
-
 const fontSize = style({
   // React prop name and CSS property
   prop: "fontSize",
@@ -191,11 +190,9 @@ const fontSize = style({
   // Optional prop alias
   alias: "ffffontSizzzee"
 })
-
 const Text = styled.div`
   ${fontSize}
 `
-
 const SomeComponent = props => <Text fontSize={3}>Hello</Text>
 const SomeComponent = props => <Text ffffontSizzzee={1}>Hello</Text>
 ```
@@ -258,7 +255,6 @@ const breakpoints = [
   1200,
   1800,
 ]
-
 // aliases
 breakpoints.sm = breakpoints[0]
 breakpoints.md = breakpoints[1]
@@ -272,7 +268,6 @@ breakpoints.xl = breakpoints[3]
     1/4   // 25% from the next breakpoint and up
   ]}
 />
-
 <Box width={{ sm: 1, md: 1/2, lg: 1/4 }} />
 ```
 
