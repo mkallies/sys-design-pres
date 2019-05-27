@@ -36,6 +36,10 @@ export { default as theme } from "./theme"
 
 ---
 
+![](/images/buttons.jpg)
+
+---
+
 # Using a global theme
 
 - What are my design tokens?
@@ -47,6 +51,8 @@ export { default as theme } from "./theme"
 - etc...
 
 ```notes
+Design tokens are the visual design atoms of the design system — specifically, they are named entities that store visual design attributes.
+We use them in place of hard-coded values (such as hex values for color or pixel values for spacing) in order to maintain a scalable and consistent visual system for UI development.
   - Use your design tokens to setup the theme file
   - How the theme relates to
   the utility functions
@@ -59,7 +65,7 @@ export default QuoteLayout
 
 ```jsx
 export const theme = {
-  breakpoints: [32, 48, 64],
+  breakpoints: [600, 900, 1200, 1800],
   space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
   fontSizes: [12, 14, 16, 20, 24, 36, 48, 80, 96],
   fontWeights: [100, 200, 300, 400, 500, 600, 700, 800, 900],
@@ -93,7 +99,8 @@ Example of a theme
 - variant, style, compose
 
 ```notes
-  - Talk about space and color API
+  - space is composed of margin + padding, top, bottom, left, right, x axis and y axis
+  - color is for color and background-color (bg)
   - Relate back to theme
   - Component API allows us to respond to changing requirements quickly
   - Talk about variant, style and compose with
@@ -110,17 +117,20 @@ Example of a theme
 ```jsx
 import { space, color } from 'styled-system'
 
-
 const Box = styled.div`
   ${space}
   ${color}
 `
 
-<Box m={2} p={4} bg='red' color='rebeccapurple'>
+// space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
+
+// margin: 8px
+// padding: 32px
+<Box m={2} p={4} bg='black' color='grayLight'>
   {children}
 </Box>
 
-<Box py={2}  mx={1} bg='red' color='rebeccapurple'>
+<Box py={2}  mx={1} bg='blue' color='text'>
   {children}
 </Box>
 
@@ -139,7 +149,7 @@ export default QuoteLayout
 buttonStyles: {
   primary: {
     color: colors.white,
-    background: colors.blue,
+    backgroundColor: colors.blue,
     border: borders[0],
   }
 }
@@ -219,7 +229,7 @@ export const typography = compose(
 import { typography } from "style/utils"
 
 const Text = styled.div`
-  ${typograph}
+  ${typography}
 `
 ```
 
@@ -228,7 +238,7 @@ const Text = styled.div`
 # Responsive styling
 
 - Defined by the breakpoints property in your theme file
-- Defaults to px (if you supply you're own breakpoints) but you can change the unit type
+- Defaults to px but you can change the unit type
 
 ```notes
   - How weird is it to use arrays? At first object seems sensible
@@ -293,8 +303,12 @@ Show an example of styled system with variants, responsive design vs regular css
 
 ### References
 
-- [Styled-System](https://styled-system.com/)
+- [Styled-System docs](https://styled-system.com/)
 - [Component Based Design System With Styled-System](https://varun.ca/styled-system/)
 - [Brent Jackson's Blog](https://jxnblk.com/blog/)
 - [Custom CSS is the path to Inconsistent UI - Artem Sapegin](https://www.youtube.com/watch?v=_CsBRkRTzIA)
-- [Primer Components](https://primer.style/components)
+
+Repos
+
+- [Github's Primer Components](https://primer.style/components)
+- [Priceline's Design system](https://github.com/pricelinelabs/design-system)
