@@ -36,7 +36,7 @@ export { default as theme } from "./theme"
 
 ---
 
-![](/images/buttons.jpg)
+![](/images/mosaic.png)
 
 ```notes
 How consistent is your UI?
@@ -264,12 +264,12 @@ breakpoints.xl = breakpoints[3]
 
 <Box
   width={[
-    1,    // 100% width below the smallest breakpoint
-    1/2,  // 50% from the next breakpoint and up
-    1/4   // 25% from the next breakpoint and up
+    1,    // 0-599px = 100% width
+    1/2,  // 600-899px = 50% width
+    1/4   // 900-1199px = 25% width
   ]}
 />
-<Box width={{ sm: 1, md: 1/2, lg: 1/4 }} />
+<Box width={{ _: 1, sm: 1/2 , md: 1/4, }} />
 ```
 
 ```notes
