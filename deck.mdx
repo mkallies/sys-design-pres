@@ -38,6 +38,10 @@ export { default as theme } from "./theme"
 
 ![](/images/buttons.jpg)
 
+```notes
+How consistent is your UI?
+```
+
 ---
 
 # Using a global theme
@@ -68,27 +72,23 @@ export const theme = {
   breakpoints: [600, 900, 1200, 1800],
   space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
   fontSizes: [12, 14, 16, 20, 24, 36, 48, 80, 96],
-  fontWeights: [100, 200, 300, 400, 500, 600, 700, 800, 900],
-  letterSpacings: {
-    normal: "normal",
-    heading: "0.1em"
-  },
+  fontWeights: [300, 500, 700],
   fonts: {
-    serif: "athelas, georgia, times, serif"
+    body: "system-ui, georgia, times, serif"
   },
   borders: ["2px solid", "4px solid"],
   colors: {
     black: "#000",
-    "light-gray": "#eee",
     "near-white": "#f4f4f4",
     white: "#fff"
   }
-  // ...and so on
+  // 🚧 your tokens here 🚧
 }
 ```
 
 ```notes
 Example of a theme
+Array for space and fontSizes
 ```
 
 ---
@@ -126,11 +126,11 @@ const Box = styled.div`
 
 // margin: 8px
 // padding: 32px
-<Box m={2} p={4} bg='black' color='grayLight'>
+<Box m={2} p={4} bg='black' color='white'>
   {children}
 </Box>
 
-<Box py={2}  mx={1} bg='blue' color='text'>
+<Box py={2} mx={1} bg='background' color='text'>
   {children}
 </Box>
 
@@ -155,12 +155,13 @@ buttonStyles: {
 }
 
 import { variant } from "styled-system"
-const btnStyles = variant({ key: "buttonStyles"})
-
+const btnStyles = variant({
+  // Key for theme values
+  key: "buttonStyles"
+})
 const Button = styled.button`
   ${btnStyles}
 `
-
 <Button variant='primary'>
   OK
 </Button>
@@ -280,14 +281,15 @@ You can change the unit of the breakpoint
 # Why should I use styled-system?
 
 - Consistency
-- Easy
 - Maintainability
-- GitHub's Primer Components
+- Makes building UI easier and faster
 
 ```notes
-During code review you don't know the style of each component.
+1. During code review you don't know the style of each component.
 With s-s you know exactly what you are getting
-Show an example of styled system with variants, responsive design vs regular css in js
+- Encouraged to use a theme
+2. Can easily delete components with styles, don't need to worry about style files
+3. Easy to use component API for primitive components
 ```
 
 ---
