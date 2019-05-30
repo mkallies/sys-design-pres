@@ -1,5 +1,5 @@
 import { Image } from "mdx-deck"
-import { FullScreenCode } from "mdx-deck/layouts"
+import { FullScreenCode, Split } from "mdx-deck/layouts"
 import QuoteLayout from "./QuoteLayout"
 export { default as theme } from "./theme"
 
@@ -136,6 +136,12 @@ const Box = styled.div`
 
 ```
 
+```notes
+  - m, mr, ml, mt, mb, mx, my
+  - tachyons and tailwindcss are similar
+  - Brent Jackson and Adam Morse (tachyons) are friends
+```
+
 ---
 
 # variant function
@@ -167,6 +173,11 @@ const Button = styled.button`
 </Button>
 ```
 
+```notes
+ - Default variant funcs
+ - Theme -> textStyle, colorStyle, buttonStyle
+```
+
 ---
 
 # style function
@@ -182,20 +193,19 @@ const fontSize = style({
   prop: "fontSize",
   // CSS property (if different from prop argument)
   cssProperty: "fontSize",
-  // key for theme values
-  key: "fontSizes",
+  key: "fontSizes", // key for theme values
   // accessor function for transforming the value
   transformValue: n => n + "px",
   // add a fallback scale object or array, if theme is not present
   scale: [0, 4, 8, 16, 32],
-  // Optional prop alias
-  alias: "ffffontSizzzee"
+  alias: "ffffontSizzzee" // Optional prop alias
 })
 const Text = styled.div`
   ${fontSize}
 `
+// font size = 16px
 const SomeComponent = props => <Text fontSize={3}>Hello</Text>
-const SomeComponent = props => <Text ffffontSizzzee={1}>Hello</Text>
+const SomeComponent = props => <Text ffffontSizzzee={3}>Hello</Text>
 ```
 
 ---
@@ -273,8 +283,17 @@ breakpoints.xl = breakpoints[3]
 ```
 
 ```notes
-You can change the unit of the breakpoint
+- You can change the unit of the breakpoint
+- Anything between 0 and 1 is converted to percentage
 ```
+
+---
+
+export default Split
+
+![](/images/system.png)
+
+![](/images/no-system.png)
 
 ---
 
